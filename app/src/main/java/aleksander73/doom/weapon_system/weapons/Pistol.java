@@ -21,9 +21,9 @@ public class Pistol extends TypeAWeapon {
             0.5f,
             0.5f,
             new SpriteAnimation(0.25f, false, new Texture[] {
-                    GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_1.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_2.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_3.png")
+                GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_1.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_2.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/pistol/shoot_3.png")
             }),
             "pistol.wav"
         );

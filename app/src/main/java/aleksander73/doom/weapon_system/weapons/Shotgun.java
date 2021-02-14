@@ -21,16 +21,16 @@ public class Shotgun extends TypeBWeapon {
             0.75f,
             0.75f,
             new SpriteAnimation(0.2f, false, new Texture[] {
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/shoot_1.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/shoot_2.png")
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/shoot_1.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/shoot_2.png")
             }),
             "shotgun_shoot.wav",
             new SpriteAnimation(0.8f, false, new Texture[] {
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_1.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_2.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_3.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_2.png"),
-                    GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_1.png")
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_1.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_2.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_3.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_2.png"),
+                GameEngine.getResourceSystem().getTexture("weapons/shotgun/reload_1.png")
             }),
             "shotgun_reload.wav"
         );
