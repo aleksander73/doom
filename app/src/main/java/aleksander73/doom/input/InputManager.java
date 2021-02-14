@@ -26,12 +26,7 @@ public class InputManager {
     private static InputManager instance;
 
     private InputManager() {
-        sectorComparator = new Comparator<Sector>() {
-            @Override
-            public int compare(Sector sector1, Sector sector2) {
-                return Integer.compare(sector2.getLevel(), sector1.getLevel());
-            }
-        };
+        sectorComparator = (sector1, sector2) -> Integer.compare(sector2.getLevel(), sector1.getLevel());
     }
 
     public static InputManager getInstance() {
@@ -69,7 +64,6 @@ public class InputManager {
                 motionEvent.getY(pointerIndex)
         ));
         Sector sector = this.sectorAt(pos);
-        // If interaction with no sections or a foreign pointer tries to act upon the already locked sector
         if(sector == null || (sector.isLocked() && sector != pointerIdToLockedSector.get(pointerID))) {
             return false;
         }
