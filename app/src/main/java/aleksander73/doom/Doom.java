@@ -2,6 +2,7 @@ package aleksander73.doom;
 
 import java.util.Arrays;
 
+import aleksander73.doom.input.InputManager;
 import aleksander73.doom.other.Floor;
 import aleksander73.doom.player.MyCamera;
 import aleksander73.doom.player.Player;
@@ -29,8 +30,12 @@ public class Doom extends Game {
     }
 
     @Override
-    protected void setupInput() {}
+    protected void setupInput() {
+        InputManager.getInstance().initialize();
+    }
 
     @Override
-    protected void clearInput() {}
+    protected void clearInput() {
+        InputManager.getInstance().clear();
+    }
 }
