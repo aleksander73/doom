@@ -6,6 +6,7 @@ import java.util.HashSet;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.input.Sector;
 import aleksander73.doom.other.shapes.Rectangle;
+import aleksander73.doom.weapon_system.TypeBWeapon;
 import aleksander73.doom.weapon_system.Weapon;
 import aleksander73.doom.weapon_system.weapons.Pistol;
 import aleksander73.math.linear_algebra.Vector2d;
@@ -45,12 +46,7 @@ public class Player extends GameObject {
         stateMachine.enableTransition(IDLE, SWITCHING_WEAPON);
         stateMachine.enableTransition(SWITCHING_WEAPON, EQUIPPING_WEAPON);
         stateMachine.enableTransition(EQUIPPING_WEAPON, IDLE);
-        stateMachine.setOnEnter(IDLE, new Runnable() {
-            @Override
-            public void run() {
-                inventory.getEquippedWeapon().setActive(true);
-            }
-        });
+        stateMachine.setOnEnter(IDLE, () -> inventory.getEquippedWeapon().setActive(true));
         stateMachine.setAction(IDLE, () -> {
             if(inventory.getEquippedWeapon() == null || !inventory.getEquippedWeapon().getBehaviourStateMachine().currentState().equals(IDLE) || inventory.size() < 2) {
                 return;
@@ -136,6 +132,9 @@ public class Player extends GameObject {
     public void collect(Weapon weapon) {
         Weapon possessedWeapon = inventory.findWeaponOfType(weapon);
         if(possessedWeapon != null) {
+            if(possessedWeapon instanceof TypeBWeapon && possessedWeapon.getAmmo() == 0) {
+                ((TypeBWeapon)possessedWeapon).queueReload();
+            }
             possessedWeapon.addAmmo(weapon.getAmmo());
         } else {
             weapon.getComponent(Transform.class).setPosition(weapon.getHidePosition().toVector3d());
