@@ -18,6 +18,10 @@ public class Inventory {
         weapons.add(weapon);
     }
 
+    public void switchWeapons() {
+        equippedWeapon = weaponToEquip;
+    }
+
     public Weapon findWeaponOfType(Weapon weapon) {
         Weapon result = null;
         String weaponType = weapon.getClass().getSimpleName();
@@ -30,7 +34,7 @@ public class Inventory {
         return result;
     }
 
-    public Weapon weaponUp(Weapon equippedWeapon) {
+    public Weapon weaponUp() {
         int index = weapons.indexOf(equippedWeapon) + 1;
         if(index >= weapons.size()) {
             index = 0;
@@ -38,7 +42,7 @@ public class Inventory {
         return weapons.get(index);
     }
 
-    public Weapon weaponDown(Weapon equippedWeapon) {
+    public Weapon weaponDown() {
         int index = weapons.indexOf(equippedWeapon) - 1;
         if(index < 0) {
             index = weapons.size() - 1;
