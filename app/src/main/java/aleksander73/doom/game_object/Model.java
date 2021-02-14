@@ -1,4 +1,4 @@
-package aleksander73.doom;
+package aleksander73.doom.game_object;
 
 import aleksander73.vector.core.GameObject;
 import aleksander73.vector.core.Transform;
@@ -9,10 +9,10 @@ import aleksander73.vector.rendering.mesh.Mesh;
 import aleksander73.vector.rendering.renderers.MeshRenderer;
 import aleksander73.vector.rendering.shaders.Shader;
 
-public class DoomGameObject extends GameObject {
+public class Model extends GameObject {
     private final Texture mainTexture;
 
-    public DoomGameObject(String name, Transform transform, Mesh mesh, Shader shader, Colour colour, Texture mainTexture) {
+    public Model(String name, Transform transform, Mesh mesh, Shader shader, Colour colour, Texture mainTexture) {
         super(name);
         Material material = new Material(colour, mainTexture, shader);
         MeshRenderer meshRenderer = new MeshRenderer(mesh);
