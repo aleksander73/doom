@@ -18,15 +18,17 @@ public class Player extends GameObject {
     private float rotateSpeed = 500.0f;
     private float maxRotateSpeed = 6.0f;
 
+    private final Inventory inventory;
+
     public Player(Vector2d position) {
         super("Player");
         transform = new Transform(new Vector3d(position.getX(), H, position.getY()));
         this.addComponent(transform);
-
         Sector moveSector = new Sector(InputManager.MOVE_SECTOR, new Rectangle(new Vector2d(-0.5f, 0.0f), 1.0f, 2.0f), 0);
         InputManager.getInstance().addSector(moveSector);
         Sector rotateSector = new Sector(InputManager.ROTATE_SECTOR, new Rectangle(new Vector2d(0.5f, 0.0f), 1.0f, 2.0f), 0);
         InputManager.getInstance().addSector(rotateSector);
+        inventory = new Inventory();
     }
 
     @Override
@@ -37,7 +39,6 @@ public class Player extends GameObject {
 
     @Override
     public void update() {
-        // Move
         Vector2d move_r = InputManager.getInstance().findSector(InputManager.MOVE_SECTOR).getInput().r();
         Vector3d moveDelta = new Vector3d(move_r.getX(), 0.0f, -move_r.getY()).mul(moveSpeed * Time.getDeltaTime()).toVector3d();
         if(moveDelta.magnitude() > maxMoveSpeed) {
@@ -45,7 +46,6 @@ public class Player extends GameObject {
         }
         transform.translate(transform, moveDelta);
 
-        // Rotate
         Vector2d rotate_r = InputManager.getInstance().findSector(InputManager.ROTATE_SECTOR).getInput().r();
         float rotateDelta = -rotate_r.getX() * rotateSpeed * Time.getDeltaTime();
         if(rotateDelta > maxRotateSpeed) {

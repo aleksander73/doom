@@ -6,7 +6,9 @@ import java.util.List;
 import aleksander73.doom.weapon_system.Weapon;
 
 public class Inventory {
-    private List<Weapon> weapons = new ArrayList<>();
+    private final List<Weapon> weapons = new ArrayList<>();
+    private Weapon equippedWeapon = null;
+    private Weapon weaponToEquip = null;
 
     public int size() {
         return weapons.size();
@@ -42,5 +44,21 @@ public class Inventory {
             index = weapons.size() - 1;
         }
         return weapons.get(index);
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
+    }
+
+    public Weapon getWeaponToEquip() {
+        return weaponToEquip;
+    }
+
+    public void setWeaponToEquip(Weapon weaponToEquip) {
+        this.weaponToEquip = weaponToEquip;
     }
 }
