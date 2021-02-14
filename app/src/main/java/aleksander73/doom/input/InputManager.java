@@ -19,13 +19,7 @@ public class InputManager {
 
     @SuppressLint("ClickableViewAccessibility")
     public void initialize() {
-        GameEngine.getInputSystem().setOnTouchListener((view, motionEvent) -> {
-            boolean result = false;
-            if(InputManager.getInstance().isEnabled()) {
-                result = InputManager.getInstance().handleInputEvent(view, motionEvent);
-            }
-            return result;
-        });
+        GameEngine.getInputSystem().setOnTouchListener((view, motionEvent) -> InputManager.getInstance().isEnabled() && InputManager.getInstance().handleInputEvent(view, motionEvent));
     }
 
     public void clear() {}
