@@ -24,23 +24,17 @@ public abstract class TypeAWeapon extends Weapon {
         final StateMachine stateMachine = new StateMachine(new HashSet<>(Arrays.asList(IDLE, SHOOTING)), IDLE);
         stateMachine.enableTransition(IDLE, SHOOTING);
         stateMachine.enableTransition(SHOOTING, IDLE);
-        stateMachine.setOnEnter(IDLE, new Runnable() {
-            @Override
-            public void run() {
-                Texture mainTexture = TypeAWeapon.this.getMainTexture();
-                TypeAWeapon.this.getComponent(Material.class).setTexture(mainTexture);
-            }
+        stateMachine.setOnEnter(IDLE, () -> {
+            Texture mainTexture = TypeAWeapon.this.getMainTexture();
+            TypeAWeapon.this.getComponent(Material.class).setTexture(mainTexture);
         });
-        stateMachine.setAction(IDLE, new Runnable() {
-            @Override
-            public void run() {
-                Vector2d click = InputManager.getInstance().findSector(InputManager.SHOOT_SECTOR).getInput().getTouchDown();
-                if(click != null) {
-                    if(TypeAWeapon.this.canShoot()) {
-                        stateMachine.changeState(SHOOTING);
-                    } else {
-                        GameEngine.getResourceSystem().playSound(TypeAWeapon.this.getEmptySound(), false);
-                    }
+        stateMachine.setAction(IDLE, () -> {
+            Vector2d click = InputManager.getInstance().findSector(InputManager.SHOOT_SECTOR).getInput().getTouchDown();
+            if(click != null) {
+                if(TypeAWeapon.this.canShoot()) {
+                    stateMachine.changeState(SHOOTING);
+                } else {
+                    GameEngine.getResourceSystem().playSound(TypeAWeapon.this.getEmptySound(), false);
                 }
             }
         });
