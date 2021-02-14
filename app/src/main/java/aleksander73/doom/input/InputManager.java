@@ -18,6 +18,8 @@ import aleksander73.vector.utility.ListUtility;
 public class InputManager {
     public static final String MOVE_SECTOR = "MOVE_SECTOR";
     public static final String ROTATE_SECTOR = "ROTATE_SECTOR";
+    public static final String SCROLL_UP_SECTOR = "SCROLL_UP_SECTOR";
+    public static final String SCROLL_DOWN_SECTOR = "SCROLL_DOWN_SECTOR";
     public static final String SHOOT_SECTOR = "SHOOT_SECTOR";
 
     private boolean enabled = true;
