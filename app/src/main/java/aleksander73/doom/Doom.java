@@ -17,6 +17,7 @@ import aleksander73.doom.player.Player;
 import aleksander73.doom.weapon_system.weapons.Pistol;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.vector.core.Game;
+import aleksander73.vector.core.GameEngine;
 import aleksander73.vector.core.Transform;
 import aleksander73.vector.rendering.Camera;
 import aleksander73.vector.scene.Scene;
@@ -28,6 +29,7 @@ public class Doom extends Game {
 
     @Override
     protected Scene buildScene() {
+        Skybox skybox = new Skybox(GameEngine.getResourceSystem().getTexture("skyboxes/hell.png"));
         final float u = 3.0f;
         Floor floor = Floor.createFloor(new Vector2d(0.0f,  0.0f), new Vector2d(5 * u, 5 * u));
         Player player = new Player(new Vector2d(0.0f, 0.0f));
@@ -43,7 +45,7 @@ public class Doom extends Game {
         AlphaSortingManager alphaSortingManager = new AlphaSortingManager();
 
         return new Scene(Arrays.asList(
-            floor, player, camera, cameraLens, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton, alphaSortingManager
+            skybox, floor, player, camera, cameraLens, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton, alphaSortingManager
         ));
     }
 
