@@ -25,8 +25,6 @@ public class Sector {
         input.clear();
     }
 
-    // --------------------------------------------------
-
     public String getName() {
         return name;
     }
