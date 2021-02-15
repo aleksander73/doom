@@ -194,12 +194,15 @@ public class Player extends GameObject {
         }
         this.strengthen(-dArmour);
         this.heal(-dHealth);
+        CameraLens cameraLens = (CameraLens)this.getScene().find("CameraLens");
         if(this.isAlive()) {
+            cameraLens.onHurt();
             GameEngine.getResourceSystem().playSound(hurtSound, false);
             statusBar.getDoomGuy().hurt();
         } else {
             inventory.getEquippedWeapon().reset();
             this.setActive(false);
+            cameraLens.onDied();
             GameEngine.getResourceSystem().playSound(deathSound, false);
         }
     }
