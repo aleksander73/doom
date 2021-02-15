@@ -10,6 +10,7 @@ import aleksander73.doom.hud.ScrollUpButton;
 import aleksander73.doom.hud.ShootButton;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.other.Floor;
+import aleksander73.doom.player.CameraLens;
 import aleksander73.doom.player.MyCamera;
 import aleksander73.doom.player.Player;
 import aleksander73.doom.weapon_system.weapons.Pistol;
@@ -30,6 +31,7 @@ public class Doom extends Game {
         Floor floor = Floor.createFloor(new Vector2d(0.0f,  0.0f), new Vector2d(5 * u, 5 * u));
         Player player = new Player(new Vector2d(0.0f, 0.0f));
         MyCamera camera = new MyCamera(player.getComponent(Transform.class).copy());
+        CameraLens cameraLens = new CameraLens();
         Pistol pistol = new Pistol(5);
         PistolCollectable pistolCollectable = new PistolCollectable(new Pistol(5), new Vector2d(0.0f, 5.0f));
         HealthCollectable healthCollectable = new HealthCollectable(new Vector2d(0.0f, -5.0f));
@@ -39,7 +41,7 @@ public class Doom extends Game {
         ShootButton shootButton = new ShootButton(new Vector2d(0.75f, 0.0f));
 
         return new Scene(Arrays.asList(
-            floor, player, camera, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton
+            floor, player, camera, cameraLens, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton
         ));
     }
 

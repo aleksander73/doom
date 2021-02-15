@@ -1,6 +1,7 @@
 package aleksander73.doom.collectables;
 
 import aleksander73.doom.game_object.Model;
+import aleksander73.doom.player.CameraLens;
 import aleksander73.doom.player.Player;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
@@ -54,6 +55,8 @@ public abstract class Collectable extends Model {
 
     protected void onCollected() {
         GameEngine.getResourceSystem().playSound(this.getCollectSound(), false);
+        CameraLens cameraLens = (CameraLens)this.getScene().find("CameraLens");
+        cameraLens.onCollected();
     }
 
     public Player getPlayer() {
