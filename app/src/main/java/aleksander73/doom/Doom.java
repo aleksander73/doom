@@ -72,7 +72,7 @@ public class Doom extends Game {
             pistol, pistolCollectable, shotgun, superShotgun,
             healthCollectable, armourCollectable,
             scrollUpButton, scrollDownButton, shootButton,
-            statusBar,
+            statusBar, doomGuy,
             ammo_100, ammo_10, ammo_1, ammoPlus,
             health_100, health_10, health_1, healthPercent,
             armour_100, armour_10, armour_1, armourPercent,
