@@ -7,6 +7,7 @@ import aleksander73.doom.collectables.HealthCollectable;
 import aleksander73.doom.collectables.PistolCollectable;
 import aleksander73.doom.collectables.ShotgunCollectable;
 import aleksander73.doom.collectables.SuperShotgunCollectable;
+import aleksander73.doom.enemies.Imp;
 import aleksander73.doom.hud.Credits;
 import aleksander73.doom.hud.DoomGuy;
 import aleksander73.doom.hud.HUDSlot;
@@ -43,6 +44,7 @@ public class Doom extends Game {
         Player player = new Player(new Vector2d(0.0f, 0.0f));
         MyCamera camera = new MyCamera(player.getComponent(Transform.class).copy());
         CameraLens cameraLens = new CameraLens();
+        Imp imp = new Imp(new Vector2d(0.0f, 10.0f));
         Pistol pistol = new Pistol(5);
         PistolCollectable pistolCollectable = new PistolCollectable(new Pistol(5), new Vector2d(0.0f, 5.0f));
         Shotgun shotgun = new Shotgun(6);
@@ -71,6 +73,7 @@ public class Doom extends Game {
 
         return new Scene(Arrays.asList(
             skybox, floor, player, camera, cameraLens,
+            imp,
             pistol, pistolCollectable, shotgun, superShotgun,
             healthCollectable, armourCollectable,
             scrollUpButton, scrollDownButton, shootButton,
