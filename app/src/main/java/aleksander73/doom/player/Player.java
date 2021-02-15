@@ -163,6 +163,7 @@ public class Player extends GameObject {
             weapon.getComponent(Transform.class).setPosition(weapon.getHidePosition().toVector3d());
             inventory.addWeapon(weapon);
         }
+        statusBar.getDoomGuy().smile();
     }
 
     public void equip(Weapon weapon) {
