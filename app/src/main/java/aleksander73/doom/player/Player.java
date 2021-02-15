@@ -24,6 +24,8 @@ public class Player extends GameObject {
 
     public static final int MAX_HEALTH = 100;
     private int health;
+    public static final int MAX_ARMOUR = 200;
+    private int armour;
 
     private float moveSpeed = 20.0f;
     private float maxMoveSpeed = 0.2f;
@@ -43,6 +45,7 @@ public class Player extends GameObject {
         transform = new Transform(new Vector3d(position.getX(), H, position.getY()));
         this.addComponent(transform);
         health = MAX_HEALTH;
+        armour = 100;
         inventory = new Inventory();
         stateMachine = new StateMachine(new HashSet<>(Arrays.asList(IDLE, HIDING_WEAPON, SWITCHING_WEAPON, EQUIPPING_WEAPON)), IDLE);
         stateMachine.enableTransition(IDLE, HIDING_WEAPON);
@@ -165,7 +168,22 @@ public class Player extends GameObject {
         }
     }
 
+    public void strengthen(int points) {
+        this.addArmour(points);
+    }
+
+    private void addArmour(int points) {
+        armour += points;
+        if(armour > Player.MAX_ARMOUR) {
+            armour = Player.MAX_ARMOUR;
+        }
+    }
+
     public int getHealth() {
         return health;
+    }
+
+    public int getArmour() {
+        return armour;
     }
 }
