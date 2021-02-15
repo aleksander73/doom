@@ -2,6 +2,7 @@ package aleksander73.doom;
 
 import java.util.Arrays;
 
+import aleksander73.doom.collectables.HealthCollectable;
 import aleksander73.doom.collectables.PistolCollectable;
 import aleksander73.doom.hud.ScrollDownButton;
 import aleksander73.doom.hud.ScrollUpButton;
@@ -30,12 +31,13 @@ public class Doom extends Game {
         MyCamera camera = new MyCamera(player.getComponent(Transform.class).copy());
         Pistol pistol = new Pistol(5);
         PistolCollectable pistolCollectable = new PistolCollectable(new Pistol(5), new Vector2d(0.0f, 5.0f));
+        HealthCollectable healthCollectable = new HealthCollectable(new Vector2d(0.0f, -5.0f));
         ScrollUpButton scrollUpButton = new ScrollUpButton(new Vector2d(-0.85f, 0.5f));
         ScrollDownButton scrollDownButton = new ScrollDownButton(new Vector2d(-0.85f, 0.2f));
         ShootButton shootButton = new ShootButton(new Vector2d(0.75f, 0.0f));
 
         return new Scene(Arrays.asList(
-            floor, player, camera, pistol, pistolCollectable, scrollUpButton, scrollDownButton, shootButton
+            floor, player, camera, pistol, pistolCollectable, healthCollectable, scrollUpButton, scrollDownButton, shootButton
         ));
     }
 

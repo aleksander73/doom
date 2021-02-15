@@ -22,6 +22,9 @@ public class Player extends GameObject {
     private final Transform transform;
     private final float H = 1.25f;
 
+    public static final int MAX_HEALTH = 100;
+    private int health;
+
     private float moveSpeed = 20.0f;
     private float maxMoveSpeed = 0.2f;
     private float rotateSpeed = 500.0f;
@@ -39,6 +42,7 @@ public class Player extends GameObject {
         super("Player");
         transform = new Transform(new Vector3d(position.getX(), H, position.getY()));
         this.addComponent(transform);
+        health = MAX_HEALTH;
         inventory = new Inventory();
         stateMachine = new StateMachine(new HashSet<>(Arrays.asList(IDLE, HIDING_WEAPON, SWITCHING_WEAPON, EQUIPPING_WEAPON)), IDLE);
         stateMachine.enableTransition(IDLE, HIDING_WEAPON);
@@ -152,5 +156,16 @@ public class Player extends GameObject {
         } else {
             stateMachine.changeState(SWITCHING_WEAPON);
         }
+    }
+
+    public void heal(int points) {
+        health += points;
+        if(health > Player.MAX_HEALTH) {
+            health = Player.MAX_HEALTH;
+        }
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

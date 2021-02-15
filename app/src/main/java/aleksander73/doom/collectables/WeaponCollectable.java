@@ -5,7 +5,7 @@ import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.vector.core.GameEngine;
 import aleksander73.vector.rendering.materials.Texture;
 
-public class WeaponCollectable extends Collectable {
+public abstract class WeaponCollectable extends Collectable {
     private final Weapon weapon;
     private static final String weaponCollectSound = "weapon_collected.wav";
 
