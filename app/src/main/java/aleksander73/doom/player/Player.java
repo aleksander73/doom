@@ -6,6 +6,7 @@ import java.util.HashSet;
 import aleksander73.doom.hud.StatusBar;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.input.Sector;
+import aleksander73.doom.managers.SoundManager;
 import aleksander73.doom.other.shapes.Rectangle;
 import aleksander73.doom.weapon_system.TypeBWeapon;
 import aleksander73.doom.weapon_system.Weapon;
@@ -204,6 +205,8 @@ public class Player extends GameObject {
             this.setActive(false);
             cameraLens.onDied();
             GameEngine.getResourceSystem().playSound(deathSound, false);
+            SoundManager soundManager = (SoundManager)this.getScene().find("SoundManager");
+            soundManager.fadeOut();
         }
     }
 
