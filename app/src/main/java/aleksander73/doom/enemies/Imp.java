@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import aleksander73.doom.animation.SpriteAnimation;
-import aleksander73.doom.weapon_system.AttackInfo;
 import aleksander73.doom.weapon_system.TypeBWeapon;
 import aleksander73.doom.weapon_system.Weapon;
 import aleksander73.math.linear_algebra.Vector2d;

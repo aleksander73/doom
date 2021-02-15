@@ -80,9 +80,7 @@ public class Player extends GameObject {
                 inventory.getEquippedWeapon().setActive(false);
             }
         });
-        stateMachine.setOnEnter(HIDING_WEAPON, () -> {
-            inventory.getEquippedWeapon().getHideAnimation().start();
-        });
+        stateMachine.setOnEnter(HIDING_WEAPON, () -> inventory.getEquippedWeapon().getHideAnimation().start());
         stateMachine.setAction(HIDING_WEAPON, () -> {
             ValueAnimation<Vector2d> hideAnimation = inventory.getEquippedWeapon().getHideAnimation();
             hideAnimation.update();
@@ -100,9 +98,7 @@ public class Player extends GameObject {
             statusBar.updateAmmo(inventory.getEquippedWeapon().getAmmo());
             stateMachine.changeState(EQUIPPING_WEAPON);
         });
-        stateMachine.setOnEnter(EQUIPPING_WEAPON, () -> {
-            inventory.getEquippedWeapon().getEquipAnimation().start();
-        });
+        stateMachine.setOnEnter(EQUIPPING_WEAPON, () -> inventory.getEquippedWeapon().getEquipAnimation().start());
         stateMachine.setAction(EQUIPPING_WEAPON, () -> {
             ValueAnimation<Vector2d> equipAnimation = inventory.getEquippedWeapon().getEquipAnimation();
             equipAnimation.update();

@@ -32,7 +32,6 @@ public abstract class Enemy extends Model {
     private static final String EXPLODING = "EXPLODING";
     private static final String DEAD = "DEAD";
 
-    // Optional
     private boolean explosionEnabled;
     private Function<AttackInfo, Boolean> shouldExplode = input -> false;
 
@@ -130,14 +129,6 @@ public abstract class Enemy extends Model {
             StatusBar statusBar = (StatusBar)this.getScene().find("StatusBar");
             statusBar.getDoomGuy().smile();
         }
-    }
-
-    private void kill() {
-        health = 0;
-        conditionStateMachine.changeState(DYING);
-        GameEngine.getResourceSystem().playSound(dieSound, false);
-        StatusBar statusBar = (StatusBar)this.getScene().find("StatusBar");
-        statusBar.getDoomGuy().smile();
     }
 
     public void enableExplosion(final SpriteAnimation explosionAnimation, Function<AttackInfo, Boolean> shouldExplode, String explosionSound) {
