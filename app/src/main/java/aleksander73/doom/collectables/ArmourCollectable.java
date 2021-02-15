@@ -8,20 +8,19 @@ import aleksander73.vector.rendering.materials.Texture;
 
 public class ArmourCollectable extends Collectable {
     public static final int ARMOUR = 5;
-    private SpriteAnimation shining;
+    private final SpriteAnimation shining;
 
     public ArmourCollectable(Vector2d position) {
         super(position, GameEngine.getResourceSystem().loadMesh("armour_collectable.mesh"), GameEngine.getResourceSystem().getTexture("items/armour_1.png"));
         shining = new SpriteAnimation(2.0f, true, new Texture[] {
-                GameEngine.getResourceSystem().getTexture("items/armour_1.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_2.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_3.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_3.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_2.png"),
-                GameEngine.getResourceSystem().getTexture("items/armour_1.png")
+            GameEngine.getResourceSystem().getTexture("items/armour_1.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_2.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_3.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_4.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_3.png"),
+            GameEngine.getResourceSystem().getTexture("items/armour_2.png")
         });
         this.addComponent(shining);
     }
