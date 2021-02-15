@@ -9,6 +9,7 @@ import aleksander73.doom.hud.ScrollDownButton;
 import aleksander73.doom.hud.ScrollUpButton;
 import aleksander73.doom.hud.ShootButton;
 import aleksander73.doom.input.InputManager;
+import aleksander73.doom.managers.AlphaSortingManager;
 import aleksander73.doom.other.Floor;
 import aleksander73.doom.player.CameraLens;
 import aleksander73.doom.player.MyCamera;
@@ -39,9 +40,10 @@ public class Doom extends Game {
         ScrollUpButton scrollUpButton = new ScrollUpButton(new Vector2d(-0.85f, 0.5f));
         ScrollDownButton scrollDownButton = new ScrollDownButton(new Vector2d(-0.85f, 0.2f));
         ShootButton shootButton = new ShootButton(new Vector2d(0.75f, 0.0f));
+        AlphaSortingManager alphaSortingManager = new AlphaSortingManager();
 
         return new Scene(Arrays.asList(
-            floor, player, camera, cameraLens, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton
+            floor, player, camera, cameraLens, pistol, pistolCollectable, healthCollectable, armourCollectable, scrollUpButton, scrollDownButton, shootButton, alphaSortingManager
         ));
     }
 
