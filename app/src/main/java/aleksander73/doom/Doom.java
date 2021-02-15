@@ -7,6 +7,7 @@ import aleksander73.doom.collectables.HealthCollectable;
 import aleksander73.doom.collectables.PistolCollectable;
 import aleksander73.doom.collectables.ShotgunCollectable;
 import aleksander73.doom.collectables.SuperShotgunCollectable;
+import aleksander73.doom.hud.Credits;
 import aleksander73.doom.hud.DoomGuy;
 import aleksander73.doom.hud.HUDSlot;
 import aleksander73.doom.hud.ScrollDownButton;
@@ -65,6 +66,7 @@ public class Doom extends Game {
         HUDSlot armour_10 = statusBar.getArmour_10();
         HUDSlot armour_1 = statusBar.getArmour_1();
         HUDSlot armourPercent = statusBar.getArmourPercent();
+        Credits credits = new Credits();
         AlphaSortingManager alphaSortingManager = new AlphaSortingManager();
 
         return new Scene(Arrays.asList(
@@ -76,6 +78,7 @@ public class Doom extends Game {
             ammo_100, ammo_10, ammo_1, ammoPlus,
             health_100, health_10, health_1, healthPercent,
             armour_100, armour_10, armour_1, armourPercent,
+            credits,
             alphaSortingManager
         ));
     }
