@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import aleksander73.doom.Skybox;
 import aleksander73.doom.game_object.Model;
 import aleksander73.doom.other.Floor;
 import aleksander73.math.linear_algebra.Vector3d;
@@ -28,6 +29,11 @@ public class AlphaSortingManager extends GameObject {
         isGUIElement = element -> element instanceof GUIElement;
         isOther = element -> !isModel.test(element) && !isGUIElement.test(element);
         modelComparator = (o1, o2) -> {
+            if(o1 instanceof Skybox) {
+                return -1;
+            } else if(o2 instanceof Skybox) {
+                return 1;
+            }
             if(o1 instanceof Floor) {
                 return -1;
             } else if(o2 instanceof Floor) {
