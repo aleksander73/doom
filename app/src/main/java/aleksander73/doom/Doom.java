@@ -7,6 +7,7 @@ import aleksander73.doom.collectables.HealthCollectable;
 import aleksander73.doom.collectables.PistolCollectable;
 import aleksander73.doom.collectables.ShotgunCollectable;
 import aleksander73.doom.collectables.SuperShotgunCollectable;
+import aleksander73.doom.hud.DoomGuy;
 import aleksander73.doom.hud.HUDSlot;
 import aleksander73.doom.hud.ScrollDownButton;
 import aleksander73.doom.hud.ScrollUpButton;
@@ -51,6 +52,7 @@ public class Doom extends Game {
         ScrollDownButton scrollDownButton = new ScrollDownButton(new Vector2d(-0.85f, 0.2f));
         ShootButton shootButton = new ShootButton(new Vector2d(0.75f, 0.0f));
         StatusBar statusBar = new StatusBar(0.4f);
+        DoomGuy doomGuy = statusBar.getDoomGuy();
         HUDSlot ammo_100 = statusBar.getAmmo_100();
         HUDSlot ammo_10 = statusBar.getAmmo_10();
         HUDSlot ammo_1 = statusBar.getAmmo_1();

@@ -15,6 +15,8 @@ import aleksander73.vector.rendering.renderers.Renderer;
 public class StatusBar extends GUIElement {
     private final float height;
 
+    private final DoomGuy doomGuy;
+
     private final float H_LINE;
     private final float HUD_SLOT_WIDTH;
     private final float HUD_SLOT_HEIGHT;
@@ -60,6 +62,11 @@ public class StatusBar extends GUIElement {
         mapCharacterToTexture.put('9', GameEngine.getResourceSystem().getTexture("hud/characters/9.png"));
         mapCharacterToTexture.put('%', GameEngine.getResourceSystem().getTexture("hud/characters/percent.png"));
         mapCharacterToTexture.put('+', GameEngine.getResourceSystem().getTexture("hud/characters/plus.png"));
+
+        doomGuy = new DoomGuy(
+                new Vector2d(0.245f, -1.0f + 0.475f * height),
+                new Vector2d(0.2f, 0.3125f)
+        );
 
         H_LINE = -1.0f + 0.6f * height;
         HUD_SLOT_WIDTH = 0.075f;
@@ -161,6 +168,10 @@ public class StatusBar extends GUIElement {
     @Override
     public float getHeight() {
         return height;
+    }
+
+    public DoomGuy getDoomGuy() {
+        return doomGuy;
     }
 
     public HUDSlot getAmmo_100() {
