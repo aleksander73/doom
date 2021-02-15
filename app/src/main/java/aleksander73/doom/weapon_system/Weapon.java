@@ -1,6 +1,7 @@
 package aleksander73.doom.weapon_system;
 
 import aleksander73.doom.animation.SpriteAnimation;
+import aleksander73.doom.hud.StatusBar;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.vector.adt.StateMachine;
 import aleksander73.vector.animation.ValueAnimation;
@@ -9,7 +10,6 @@ import aleksander73.vector.gui.GUIElement;
 import aleksander73.vector.rendering.materials.Colour;
 import aleksander73.vector.rendering.materials.Texture;
 import aleksander73.vector.rendering.renderers.Renderer;
-import aleksander73.vector.utility.functional_interface.Function;
 
 public abstract class Weapon extends GUIElement {
     private int ammo;
@@ -33,18 +33,8 @@ public abstract class Weapon extends GUIElement {
         this.mainTexture = mainTexture;
         this.shootSound = shootSound;
         hidePosition = equippedPosition.add(new Vector2d(0.0f, -h)).toVector2d();
-        equipAnimation = new ValueAnimation<>(equipTime, false, new Function<Float, Vector2d>() {
-            @Override
-            public Vector2d accept(Float t) {
-                return hidePosition.lerp(equippedPosition, t / equipTime).toVector2d();
-            }
-        });
-        hideAnimation = new ValueAnimation<>(hideTime, false, new Function<Float, Vector2d>() {
-            @Override
-            public Vector2d accept(Float t) {
-                return equippedPosition.lerp(hidePosition, t / hideTime).toVector2d();
-            }
-        });
+        equipAnimation = new ValueAnimation<>(equipTime, false, t -> hidePosition.lerp(equippedPosition, t / equipTime).toVector2d());
+        hideAnimation = new ValueAnimation<>(hideTime, false, t -> equippedPosition.lerp(hidePosition, t / hideTime).toVector2d());
         this.shootAnimation = shootAnimation;
         this.addComponents(equipAnimation, hideAnimation, shootAnimation);
         this.setActive(false);
@@ -62,6 +52,7 @@ public abstract class Weapon extends GUIElement {
     public void shoot() {
         ammo--;
         GameEngine.getResourceSystem().playSound(shootSound, false);
+        ((StatusBar)this.getScene().find("StatusBar")).updateAmmo(ammo);
     }
 
     public boolean canShoot() {

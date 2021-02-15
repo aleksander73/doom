@@ -3,12 +3,15 @@ package aleksander73.doom.player;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import aleksander73.doom.hud.StatusBar;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.input.Sector;
 import aleksander73.doom.other.shapes.Rectangle;
 import aleksander73.doom.weapon_system.TypeBWeapon;
 import aleksander73.doom.weapon_system.Weapon;
 import aleksander73.doom.weapon_system.weapons.Pistol;
+import aleksander73.doom.weapon_system.weapons.Shotgun;
+import aleksander73.doom.weapon_system.weapons.SuperShotgun;
 import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 import aleksander73.vector.adt.StateMachine;
@@ -37,6 +40,8 @@ public class Player extends GameObject {
     private static final String HIDING_WEAPON = "HIDING_WEAPON";
     private static final String SWITCHING_WEAPON = "SWITCHING_WEAPON";
     private static final String EQUIPPING_WEAPON = "EQUIPPING_WEAPON";
+
+    private StatusBar statusBar;
 
     private final Inventory inventory;
 
@@ -87,6 +92,7 @@ public class Player extends GameObject {
             }
             inventory.switchWeapons();
             inventory.getEquippedWeapon().getComponent(Renderer.class).setActive(true);
+            statusBar.updateAmmo(inventory.getEquippedWeapon().getAmmo());
             stateMachine.changeState(EQUIPPING_WEAPON);
         });
         stateMachine.setOnEnter(EQUIPPING_WEAPON, () -> {
@@ -110,8 +116,15 @@ public class Player extends GameObject {
     public void start() {
         GameObject myCamera = this.getScene().find("Camera");
         myCamera.getComponent(Transform.class).setParent(transform);
+        statusBar = (StatusBar)Player.this.getScene().find("StatusBar");
+        statusBar.updateHealth(health);
+        statusBar.updateArmour(armour);
         Pistol pistol = (Pistol)this.getScene().find("Pistol");
         this.collect(pistol);
+        Shotgun shotgun = (Shotgun)this.getScene().find("Shotgun");
+        this.collect(shotgun);
+        SuperShotgun superShotgun = (SuperShotgun)this.getScene().find("SuperShotgun");
+        this.collect(superShotgun);
         this.equip(pistol);
     }
 
@@ -143,10 +156,14 @@ public class Player extends GameObject {
                 ((TypeBWeapon)possessedWeapon).queueReload();
             }
             possessedWeapon.addAmmo(weapon.getAmmo());
+            if(possessedWeapon == inventory.getEquippedWeapon()) {
+                statusBar.updateAmmo(inventory.getEquippedWeapon().getAmmo());
+            }
         } else {
             weapon.getComponent(Transform.class).setPosition(weapon.getHidePosition().toVector3d());
             inventory.addWeapon(weapon);
         }
+        statusBar.getDoomGuy().smile();
     }
 
     public void equip(Weapon weapon) {
@@ -166,6 +183,7 @@ public class Player extends GameObject {
         if(health > Player.MAX_HEALTH) {
             health = Player.MAX_HEALTH;
         }
+        statusBar.updateHealth(health);
     }
 
     public void strengthen(int points) {
@@ -177,6 +195,7 @@ public class Player extends GameObject {
         if(armour > Player.MAX_ARMOUR) {
             armour = Player.MAX_ARMOUR;
         }
+        statusBar.updateArmour(armour);
     }
 
     public int getHealth() {
