@@ -178,6 +178,10 @@ public class Player extends GameObject {
         }
     }
 
+    public boolean isAlive() {
+        return health > 0;
+    }
+
     public void heal(int points) {
         health += points;
         if(health > Player.MAX_HEALTH) {
