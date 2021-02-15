@@ -7,6 +7,7 @@ import aleksander73.doom.collectables.HealthCollectable;
 import aleksander73.doom.collectables.PistolCollectable;
 import aleksander73.doom.collectables.ShotgunCollectable;
 import aleksander73.doom.collectables.SuperShotgunCollectable;
+import aleksander73.doom.enemies.Imp;
 import aleksander73.doom.hud.Credits;
 import aleksander73.doom.hud.DoomGuy;
 import aleksander73.doom.hud.HUDSlot;
@@ -16,6 +17,7 @@ import aleksander73.doom.hud.ShootButton;
 import aleksander73.doom.hud.StatusBar;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.managers.AlphaSortingManager;
+import aleksander73.doom.managers.SoundManager;
 import aleksander73.doom.other.Floor;
 import aleksander73.doom.player.CameraLens;
 import aleksander73.doom.player.MyCamera;
@@ -43,6 +45,7 @@ public class Doom extends Game {
         Player player = new Player(new Vector2d(0.0f, 0.0f));
         MyCamera camera = new MyCamera(player.getComponent(Transform.class).copy());
         CameraLens cameraLens = new CameraLens();
+        Imp imp = new Imp(new Vector2d(0.0f, 10.0f));
         Pistol pistol = new Pistol(5);
         PistolCollectable pistolCollectable = new PistolCollectable(new Pistol(5), new Vector2d(0.0f, 5.0f));
         Shotgun shotgun = new Shotgun(6);
@@ -68,9 +71,11 @@ public class Doom extends Game {
         HUDSlot armourPercent = statusBar.getArmourPercent();
         Credits credits = new Credits();
         AlphaSortingManager alphaSortingManager = new AlphaSortingManager();
+        SoundManager soundManager = new SoundManager();
 
         return new Scene(Arrays.asList(
             skybox, floor, player, camera, cameraLens,
+            imp,
             pistol, pistolCollectable, shotgun, superShotgun,
             healthCollectable, armourCollectable,
             scrollUpButton, scrollDownButton, shootButton,
@@ -79,7 +84,7 @@ public class Doom extends Game {
             health_100, health_10, health_1, healthPercent,
             armour_100, armour_10, armour_1, armourPercent,
             credits,
-            alphaSortingManager
+            alphaSortingManager, soundManager
         ));
     }
 

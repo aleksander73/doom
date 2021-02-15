@@ -6,6 +6,7 @@ import java.util.HashSet;
 import aleksander73.doom.hud.StatusBar;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.input.Sector;
+import aleksander73.doom.managers.SoundManager;
 import aleksander73.doom.other.shapes.Rectangle;
 import aleksander73.doom.weapon_system.TypeBWeapon;
 import aleksander73.doom.weapon_system.Weapon;
@@ -16,6 +17,7 @@ import aleksander73.math.linear_algebra.Vector2d;
 import aleksander73.math.linear_algebra.Vector3d;
 import aleksander73.vector.adt.StateMachine;
 import aleksander73.vector.animation.ValueAnimation;
+import aleksander73.vector.core.GameEngine;
 import aleksander73.vector.core.GameObject;
 import aleksander73.vector.core.Transform;
 import aleksander73.vector.rendering.renderers.Renderer;
@@ -44,6 +46,9 @@ public class Player extends GameObject {
     private StatusBar statusBar;
 
     private final Inventory inventory;
+
+    private final String hurtSound = "player_hurt.wav";
+    private final String deathSound = "player_death.wav";
 
     public Player(Vector2d position) {
         super("Player");
@@ -178,22 +183,49 @@ public class Player extends GameObject {
         }
     }
 
+    public boolean isAlive() {
+        return health > 0;
+    }
+
+    public void hurt(int points) {
+        int dArmour = (int)((armour / (float)MAX_ARMOUR) * points);
+        int dHealth = points - dArmour;
+        if(dArmour > armour) {
+            dHealth += dArmour - armour;
+        }
+        this.strengthen(-dArmour);
+        this.heal(-dHealth);
+        CameraLens cameraLens = (CameraLens)this.getScene().find("CameraLens");
+        if(this.isAlive()) {
+            cameraLens.onHurt();
+            GameEngine.getResourceSystem().playSound(hurtSound, false);
+            statusBar.getDoomGuy().hurt();
+        } else {
+            inventory.getEquippedWeapon().reset();
+            this.setActive(false);
+            cameraLens.onDied();
+            GameEngine.getResourceSystem().playSound(deathSound, false);
+            SoundManager soundManager = (SoundManager)this.getScene().find("SoundManager");
+            soundManager.fadeOut();
+        }
+    }
+
     public void heal(int points) {
         health += points;
         if(health > Player.MAX_HEALTH) {
             health = Player.MAX_HEALTH;
+        } else if(health <= 0) {
+            health = 0;
         }
         statusBar.updateHealth(health);
     }
 
     public void strengthen(int points) {
-        this.addArmour(points);
-    }
-
-    private void addArmour(int points) {
         armour += points;
         if(armour > Player.MAX_ARMOUR) {
             armour = Player.MAX_ARMOUR;
+        } else if(armour < 0) {
+            armour = 0;
         }
         statusBar.updateArmour(armour);
     }
