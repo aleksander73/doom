@@ -17,6 +17,7 @@ import aleksander73.doom.hud.ShootButton;
 import aleksander73.doom.hud.StatusBar;
 import aleksander73.doom.input.InputManager;
 import aleksander73.doom.managers.AlphaSortingManager;
+import aleksander73.doom.managers.GameManager;
 import aleksander73.doom.managers.SoundManager;
 import aleksander73.doom.other.Floor;
 import aleksander73.doom.player.CameraLens;
@@ -72,6 +73,7 @@ public class Doom extends Game {
         Credits credits = new Credits();
         AlphaSortingManager alphaSortingManager = new AlphaSortingManager();
         SoundManager soundManager = new SoundManager();
+        GameManager gameManager = new GameManager();
 
         return new Scene(Arrays.asList(
             skybox, floor, player, camera, cameraLens,
@@ -84,7 +86,7 @@ public class Doom extends Game {
             health_100, health_10, health_1, healthPercent,
             armour_100, armour_10, armour_1, armourPercent,
             credits,
-            alphaSortingManager, soundManager
+            alphaSortingManager, soundManager, gameManager
         ));
     }
 

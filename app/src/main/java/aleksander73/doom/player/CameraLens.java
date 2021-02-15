@@ -11,38 +11,49 @@ import aleksander73.vector.gui.GUIElement;
 import aleksander73.vector.rendering.materials.Colour;
 import aleksander73.vector.rendering.materials.Material;
 import aleksander73.vector.rendering.materials.Texture;
-import aleksander73.vector.utility.functional_interface.Function;
 
 public class CameraLens extends GUIElement {
     private static final Colour DEFAULT_LENS_COLOUR = new Colour(0, 0, 0, 0);
     private final ValueAnimation<Float> collectAnimation;
+
     private static final Colour COLLECT_LENS_COLOUR = new Colour(255, 255, 0, 0);
     private static final int COLLECT_ALPHA_MAX = 32;
     private final float COLLECT_ANIMATION_TIME = 0.5f;
+
     private ValueAnimation<Float> hurtAnimation;
     private static final Colour HURT_LENS_COLOUR = new Colour(255, 0, 0, 0);
     private static final int HURT_ALPHA_MAX = 128;
     private final float HURT_ANIMATION_TIME = 1.0f;
+
     private ValueAnimation<Float> dieAnimation;
     private static final Colour DIE_LENS_COLOUR = new Colour(255, 0, 0, 0);
     private static final int DIE_ALPHA_MAX = 255;
     private final float DIE_ANIMATION_TIME = 5.0f;
+
+    private ValueAnimation<Float> gameWonAnimation;
+    private static final Colour GAME_WON_LENS_COLOUR = new Colour(0, 255, 0, 0);
+    private static final int GAME_WON_ALPHA_MAX = 255;
+    private final float GAME_WON_ANIMATION_TIME = 5.0f;
+
     private ValueAnimation<Float> animationToPlay;
     private final StateMachine stateMachine;
     private final String IDLE = "IDLE";
     private final String RUNNING = "RUNNING";
+
     private Material material;
     private final Texture defaultTex;
     private final Texture gameOverTex;
+    private final Texture gameWonTex;
 
     public CameraLens() {
         super("CameraLens", new Vector2d(0.0f, 0.0f), new Vector2d(2.0f, 2.0f), 3, DEFAULT_LENS_COLOUR, null);
         collectAnimation = new ValueAnimation<>(COLLECT_ANIMATION_TIME, false, t -> (float)(COLLECT_ALPHA_MAX * Math.sin((Math.PI / COLLECT_ANIMATION_TIME) * t)));
         hurtAnimation = new ValueAnimation<>(HURT_ANIMATION_TIME, false, t -> (float)(HURT_ALPHA_MAX * Math.sin((Math.PI / HURT_ANIMATION_TIME) * t)));
         dieAnimation = new ValueAnimation<>(DIE_ANIMATION_TIME, false, t -> (float)(DIE_ALPHA_MAX * Math.sin((Math.PI / (2.0f * DIE_ANIMATION_TIME)) * t)));
-        this.addComponents(collectAnimation);
+        gameWonAnimation = new ValueAnimation<>(GAME_WON_ANIMATION_TIME, false, t -> (float)(GAME_WON_ALPHA_MAX * Math.sin((Math.PI / (2.0f * GAME_WON_ANIMATION_TIME)) * t)));
         defaultTex = GameEngine.getResourceSystem().getDefaultTex();
         gameOverTex = GameEngine.getResourceSystem().getTexture("hud/game_over.png");
+        gameWonTex = GameEngine.getResourceSystem().getTexture("hud/game_won.png");
         stateMachine = new StateMachine(new HashSet<>(Arrays.asList(IDLE, RUNNING)), IDLE);
         stateMachine.enableTransition(IDLE, RUNNING);
         stateMachine.enableTransition(RUNNING, RUNNING);
@@ -89,6 +100,13 @@ public class CameraLens extends GUIElement {
         material.setTexture(gameOverTex);
         animationToPlay = dieAnimation;
         material.setColour(DIE_LENS_COLOUR);
+        stateMachine.changeState(RUNNING);
+    }
+
+    public void onGameWon() {
+        material.setTexture(gameWonTex);
+        animationToPlay = gameWonAnimation;
+        material.setColour(GAME_WON_LENS_COLOUR);
         stateMachine.changeState(RUNNING);
     }
 }
