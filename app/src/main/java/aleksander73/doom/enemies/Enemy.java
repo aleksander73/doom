@@ -24,7 +24,6 @@ import aleksander73.vector.utility.functional_interface.Function;
 public abstract class Enemy extends Model {
     private int health;
     protected static final float H = 1.0f;
-    private static final float DIE_HEIGHT = -25.0f;
 
     private final StateMachine conditionStateMachine;
     private static final String IDLE = "IDLE";
@@ -92,24 +91,16 @@ public abstract class Enemy extends Model {
     @Override
     public void start() {
         player = (Player)this.getScene().find("Player");
-//		Transform transform = this.getComponent(Transform.class);
-//		transform.rotate(Vector3d.zUnitVector, 180.0f);
     }
 
     @Override
     public void update() {
         Transform transform = this.getComponent(Transform.class);
-        Vector3d playerPosition = player.getComponent(Transform.class).getPosition();
         transform.rotate( Vector3d.yUnitVector, 60.0f * Time.getDeltaTime());
-//		transform.lookAt(new Vector3d(playerPosition.getX(), transform.getPosition().getY(), playerPosition.getZ()));
         String currentState = conditionStateMachine.currentState();
         conditionStateMachine.update();
         if(currentState.equals(IDLE)) {
             behaviourStateMachine.update();
-        }
-        // Check for fall
-        if(transform.getPosition().getY() < DIE_HEIGHT) {
-            this.kill();
         }
     }
 
