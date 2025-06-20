@@ -1,12 +1,5 @@
 # Doom
 
-<span>
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="license">
-    <img src="https://img.shields.io/github/tag/aleksander73/doom.svg?label=version&style=flat-square" alt="version">
-</span>
-
-#
-
 Doom is a game clone prototype of the legendary Doom game from 1993 developed by id Software.
 
 ## Gameplay
