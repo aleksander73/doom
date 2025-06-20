@@ -1,7 +1,9 @@
 # Doom
 
-<img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="license">
-<img src="https://img.shields.io/github/tag/aleksander73/doom.svg?label=version&style=flat-square" alt="version">
+<span>
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="license">
+    <img src="https://img.shields.io/github/tag/aleksander73/doom.svg?label=version&style=flat-square" alt="version">
+</span>
 
 #
 
